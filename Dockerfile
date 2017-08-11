@@ -10,7 +10,7 @@ ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 # speed up Maven JVM a bit
-#ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
+ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 ENTRYPOINT ["/usr/bin/mvn"]
 # ----
 # Install project dependencies and keep sources
@@ -22,6 +22,6 @@ RUN git clone https://github.com/r1th4l1n/gae-java-basic-pom.git && cp gae-java-
 #RUN rm -rf /usr/src/app/gae-java-basic-pom
 #RUN mvn -T 1C install && rm -rf target
 #RUN mvn clean #redo
-RUN mvn dependency:resolve && rm -rf target
+RUN mvn -T 2C dependency:resolve && rm -rf target
 # copy other source files (keep in image)
 #COPY src /usr/src/app/src
