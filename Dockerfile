@@ -1,4 +1,4 @@
-FROM google/cloud-sdk:alpine
+FROM google/cloud-sdk:183.0.0-alpine
 
 # ----
 # Install JDK (copied from the OpenJDK Dockerfile on Docker Hub)
@@ -28,7 +28,7 @@ RUN { \
 ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
 ENV PATH $PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin
 
-ENV JAVA_VERSION 8u131
+ENV JAVA_VERSION 8u121
 ENV JAVA_ALPINE_VERSION 8.121.13-r0
 
 RUN set -x \
@@ -47,7 +47,7 @@ RUN gcloud components install app-engine-java
 # ----
 # Install Maven
 RUN apk add --no-cache curl tar bash git
-ARG MAVEN_VERSION=3.5.2
+ARG MAVEN_VERSION=3.3.9
 ARG USER_HOME_DIR="/root"
 RUN mkdir -p /usr/share/maven && \
 curl -fsSL http://apache.osuosl.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar -xzC /usr/share/maven --strip-components=1 && \
